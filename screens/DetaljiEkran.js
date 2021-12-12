@@ -1,19 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 import { STUDENTI } from '../model/TestPodaci'
 
 const DetaljiEkran = (props) => {
+    const [StudentId, setStudentId] = useState(props.route.params.id);
+    const [StudentObj, setStudentObj] = useState({});
+
+    useEffect(() => {
+        STUDENTI.map((it) => {
+            if (it.id === StudentId) {
+                setStudentObj(it);
+            }
+        })
+    }, [StudentId])
+
     return (
-        <View>
-            {STUDENTI.map((it) => {
-                if (it.id === props.route.params.id) {
-                    <View>
-                        <Text>Ime: {it.ime}</Text>
-                        <Text>Naslov: {it.naslov}</Text>
-                    </View>
-                }
-            })}
+        <View style={styles.ekran}>
+            <Text>Ime: {StudentObj.ime}</Text>
+            <Text>Naslov: {StudentObj.naslov}</Text>
         </View>
 
     )

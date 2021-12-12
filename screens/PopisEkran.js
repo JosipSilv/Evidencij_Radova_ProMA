@@ -6,7 +6,7 @@ import { STUDENTI } from '../model/TestPodaci';
 const PopisEkran = (props) => {
     const prikazElelementa = (podaci) => {
         return (
-            <TouchableOpacity onPress={props.navigation.navigate('Detalji ekran', {
+            <TouchableOpacity onPress={() => props.navigation.navigate('Detalji ekran', {
                 id: podaci.item.id
             })}>
                 <View style={styles.popisElement}>
@@ -16,7 +16,7 @@ const PopisEkran = (props) => {
         );
     };
     return (
-        <View style={stil.ekran}>
+        <View style={styles.ekran}>
             <Text>Ekran sa popisom studenata</Text>
             <FlatList data={STUDENTI} keyExtractor={(item) => item.id} renderItem={prikazElelementa} />
         </View>
