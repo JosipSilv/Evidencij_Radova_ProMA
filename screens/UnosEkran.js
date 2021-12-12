@@ -1,10 +1,27 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import React, {useState} from 'react'
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+
+import RadioButton from '../components/RadioButton'
+import { data } from '../components/VrstaRadaData'
 
 const UnosEkran = (props) => {
+
     return (
         <View style={styles.ekran}>
             <Text>Ekran za unos novih podataka</Text>
+            <View>
+                <Text>Student/ica:</Text>
+                <TextInput />
+
+                <Text>Naslov:</Text>
+                <TextInput />
+            </View>
+
+            <View>
+                <RadioButton data = {data} />
+            </View>
+
+            <Button title='Dodaj' />
         </View>
     )
 }
