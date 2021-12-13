@@ -17,8 +17,11 @@ const DetaljiEkran = (props) => {
 
     return (
         <View style={styles.ekran}>
-            <Text>Ime: {StudentObj.ime}</Text>
-            <Text>Naslov: {StudentObj.naslov}</Text>
+            <View style={styles.detalji_container}>
+                <Text style={{color: 'white'}}>Ime: {StudentObj.ime}</Text>
+                <Text style={styles.space}>Naslov: {StudentObj.naslov}</Text>
+                <Text style={styles.space}>Vrsta: {StudentObj.vrsta}</Text>
+            </View>
         </View>
 
     )
@@ -29,10 +32,26 @@ const styles = StyleSheet.create({
     ekran: {
         flex: 1,
         padding: 10,
-        backgroundColor: '#99BCD7',
+        backgroundColor: '#8F4A64',
         alignItems: 'center',
-        // justifyContent: 'center',
+        justifyContent: 'space-between',
+        flexDirection: 'column',
     },
+    detalji_container: {
+        backgroundColor: '#AA4C79',
+        borderWidth: 1,
+        borderRadius: 20,
+        borderColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 250,
+        height: 400,
+        marginTop: 20
+    },
+    space: {
+        marginTop: 25,
+        color: 'white'
+    }
 });
 
 

@@ -11,22 +11,31 @@ import PocetniEkran from './screens/PocetniEkran';
 import PopisEkran from './screens/PopisEkran';
 import UnosEkran from './screens/UnosEkran';
 
+import { Ionicons } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
+
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name='Pocetni ekran' component={PocetniEkran} />
-        <Stack.Screen name='Detalji ekran' component={DetaljiEkran} options={(pr) => {
+      <Stack.Navigator screenOptions={
+        {
+          headerStyle: {
+            backgroundColor: '#C56A8C'
+          }
+        }
+      }>
+        <Stack.Screen name='Pocetni ekran' component={PocetniEkran} options={{ title: 'Evidencija radova' }} />
+        <Stack.Screen name='Detalji' component={DetaljiEkran} options={(pr) => {
           return {
-            headerRight: () => { return <Button title='Home' onPress={() => pr.navigation.navigate('Pocetni ekran')} /> }
+            headerRight: () => { return <Ionicons name='home' size={20} onPress={() => pr.navigation.navigate('Pocetni ekran')} /> }
           }
         }} />
-        <Stack.Screen name='Popis ekran' component={PopisEkran} options={(pr) => {
+        <Stack.Screen name='Popis radova' component={PopisEkran} options={(pr) => {
           return {
-            headerRight: () => { return <Button title='Novi' onPress={() => pr.navigation.navigate('Unos ekran')} /> }
+            headerRight: () => { return <AntDesign name='addfile' size={20} title='Novi' onPress={() => pr.navigation.navigate('Unos')} /> }
           }
         }} />
-        <Stack.Screen name='Unos ekran' component={UnosEkran} />
+        <Stack.Screen name='Unos' component={UnosEkran} options={{ title: 'Unos' }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -13,11 +13,11 @@ const RadioButton = ({ data, onSelect }) => {
 
     return (
         <View>
-            {data.map((item) => {
+            {data.map((item, idx) => {
                 return (
-                    <Pressable onPress={() => Odabir(item)} style={styles.radio}>
-                        {VrstaIzbor == item.vrsta ? <MaterialIcons name='radio-button-checked' size={20} /> : <MaterialIcons name='radio-button-unchecked' size={20} />}
-                        <Text>{item.vrsta}</Text>
+                    <Pressable onPress={() => Odabir(item)} key={idx} style={styles.radio}>
+                        {VrstaIzbor == item.vrsta ? <MaterialIcons name='radio-button-checked' size={15} color={'white'} /> : <MaterialIcons name='radio-button-unchecked' size={15} color={'white'} />}
+                        <Text style={styles.text}>{item.vrsta}</Text>
                     </Pressable>)
             })}
         </View>
@@ -27,8 +27,17 @@ const RadioButton = ({ data, onSelect }) => {
 export default RadioButton
 
 const styles = StyleSheet.create({
+    text: {
+        fontSize: 16,
+        lineHeight: 21,
+        letterSpacing: 0.25,
+        color: 'white',
+    },
     radio: {
-        borderColor: 'black',
-        borderWidth: 2
-    }
+        paddingVertical: 15,
+        paddingHorizontal: 10,
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center"
+    },
 })
