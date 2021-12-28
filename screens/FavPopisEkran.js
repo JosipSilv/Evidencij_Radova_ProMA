@@ -1,16 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 
-import { STUDENTI } from '../model/TestPodaci';
-
 import { Foundation } from '@expo/vector-icons'
 
 //REDUX
 import { useSelector } from 'react-redux';
 
-const PopisEkran = (props) => {
-    const radoviPrikaz = useSelector(state => state.radovi.filterRadovi)
-
+const FavPopisEkran = (props) => {
+    const radoviFavorit = useSelector((state) => state.radovi.favoritRadovi)
 
     const prikazElementa = (podaci) => {
         return (
@@ -24,11 +21,13 @@ const PopisEkran = (props) => {
     return (
         <View style={styles.ekran}>
             <View style={styles.buttonContainer} >
-                <FlatList data={radoviPrikaz} keyExtractor={(item) => item.id} renderItem={prikazElementa} />
+                <FlatList data={radoviFavorit} keyExtractor={(item) => item.id} renderItem={prikazElementa} />
             </View>
         </View>
     );
-};
+}
+
+export default FavPopisEkran
 
 const styles = StyleSheet.create({
     ekran: {
@@ -70,5 +69,4 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 5,
     },
-});
-export default PopisEkran
+})

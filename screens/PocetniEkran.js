@@ -7,7 +7,7 @@ const PocetniEkran = (props) => {
             <Image source={require('../assets/books.jpg')} style={styles.slika} />
 
             <View>
-                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("Popis radova")}>
+                <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate("Popis radova", {screen: 'Popis svih'})}>
                     <Text style={styles.text}>Popis radova</Text>
                 </TouchableOpacity>
 

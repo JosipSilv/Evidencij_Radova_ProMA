@@ -1,26 +1,46 @@
-import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React, { useState, useEffect, useCallback } from 'react'
+import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
 
 import { STUDENTI } from '../model/TestPodaci'
 
-const DetaljiEkran = (props) => {
-    const [StudentId, setStudentId] = useState(props.route.params.id);
-    const [StudentObj, setStudentObj] = useState({});
+import { promjenaFavorita } from "../store/actions/radovi";
 
-    useEffect(() => {
-        STUDENTI.map((it) => {
-            if (it.id === StudentId) {
-                setStudentObj(it);
-            }
-        })
-    }, [StudentId])
+//REDUX
+import { useSelector, useDispatch } from 'react-redux';
+
+const DetaljiEkran = (props) => {
+    //const [StudentId, setStudentId] = useState(props.route.params.id);
+    // const [StudentObj, setStudentObj] = useState({});
+
+    // useEffect(() => {
+    //     STUDENTI.map((it) => {
+    //         if (it.id === StudentId) {
+    //             setStudentObj(it);
+    //         }
+    //     })
+    // }, [StudentId])
+
+    //TEST DISPATCH
+    const dispatch = useDispatch();
+    const akcijaFav = () => {
+        dispatch(promjenaFavorita(idStudent))
+    }
+
+
+    const idStudent = Number(props.route.params.id);
+    const sviRadovi = useSelector(state => state.radovi.radovi)
+    const rad = sviRadovi.find((r) => r.id === idStudent);
 
     return (
         <View style={styles.ekran}>
             <View style={styles.detalji_container}>
-                <Text style={{color: 'white'}}>Ime: {StudentObj.ime}</Text>
-                <Text style={styles.space}>Naslov: {StudentObj.naslov}</Text>
-                <Text style={styles.space}>Vrsta: {StudentObj.vrsta}</Text>
+                <Text style={{ color: 'white' }}>Ime: {rad.ime}</Text>
+                <Text style={styles.space}>Naslov: {rad.naslov}</Text>
+                <Text style={styles.space}>Vrsta: {rad.vrsta}</Text>
+
+                <TouchableOpacity style={styles.button} onPress={akcijaFav}>
+                    <Text style={styles.text}>Dodaj u favorite</Text>
+                </TouchableOpacity>
             </View>
         </View>
 
@@ -51,7 +71,25 @@ const styles = StyleSheet.create({
     space: {
         marginTop: 25,
         color: 'white'
-    }
+    },
+    text: {
+        fontSize: 16,
+        lineHeight: 21,
+        letterSpacing: 0.25,
+        color: 'white',
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 12,
+        paddingHorizontal: 32,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: '#AA4C79',
+        marginTop: 20,
+        borderColor: 'white',
+        borderWidth: 1
+    },
 });
 
 

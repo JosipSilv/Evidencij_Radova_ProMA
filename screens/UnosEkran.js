@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native'
+import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native'
 
 import RadioButton from '../components/RadioButton'
 import { data } from '../components/VrstaRadaData'
@@ -7,25 +7,27 @@ import { data } from '../components/VrstaRadaData'
 const UnosEkran = (props) => {
 
     return (
-        <View style={styles.ekran}>
-            <View style={styles.detalji_container}>
-                <View style={{width: '80%'}}>
-                    <Text style={styles.text}>Student/ica:</Text>
-                    <TextInput style={styles.inputField} />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            <View style={styles.ekran}>
+                <View style={styles.detalji_container}>
+                    <View style={{ width: '80%' }}>
+                        <Text style={styles.text}>Student/ica:</Text>
+                        <TextInput style={styles.inputField} />
 
-                    <Text style={styles.text}>Naslov:</Text>
-                    <TextInput style={styles.inputField} />
+                        <Text style={styles.text}>Naslov:</Text>
+                        <TextInput style={styles.inputField} />
+                    </View>
+
+                    <View style={styles.radioContainer}>
+                        <RadioButton data={data} />
+                    </View>
+
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.text}>Dodaj</Text>
+                    </TouchableOpacity>
                 </View>
-
-                <View style={styles.radioContainer}>
-                    <RadioButton data={data} />
-                </View>
-
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.text}>Dodaj</Text>
-                </TouchableOpacity>
             </View>
-        </View>
+        </TouchableWithoutFeedback>
     )
 }
 
@@ -37,12 +39,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // justifyContent: 'center',
     },
-    radioContainer:{
-        marginTop: 10, 
+    radioContainer: {
+        marginTop: 10,
         marginBottom: 10,
     },
-    inputField:{
-        borderBottomColor: 'white', 
+    inputField: {
+        borderBottomColor: 'white',
         borderBottomWidth: 1,
         marginTop: 15,
         marginBottom: 15,
