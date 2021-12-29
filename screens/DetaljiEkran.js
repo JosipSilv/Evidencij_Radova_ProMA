@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { View, Text, StyleSheet, Button, TouchableOpacity } from 'react-native'
 
-import { STUDENTI } from '../model/TestPodaci'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import { promjenaFavorita } from "../store/actions/radovi";
 
@@ -20,16 +20,41 @@ const DetaljiEkran = (props) => {
     //     })
     // }, [StudentId])
 
+    //jeli rad u favoritima
+    const [Favorit, setFavorit] = useState(false);
+
+    const idStudent = Number(props.route.params.id);
+    const sviRadovi = useSelector(state => state.radovi.radovi)
+    const rad = sviRadovi.find((r) => r.id === idStudent);
+    const favRadovi = useSelector(state => state.radovi.favoritRadovi);
+
+    useEffect(() => {
+        setFavorit(favRadovi.some(item => item.id === rad.id))
+    }, [rad, favRadovi])
+
+    useEffect(() => {
+        props.navigation.setOptions({
+            headerTitle: rad?.ime,
+            headerRight: () => {
+                return (
+                    <TouchableOpacity onPress={() => dispatch(promjenaFavorita(idStudent))}>
+                        <View>
+                            <MaterialCommunityIcons name={Favorit ? 'star-four-points' : 'star-four-points-outline'} size={30} />
+                        </View>
+                    </TouchableOpacity>
+                );
+            },
+
+        });
+
+    }, [rad, dispatch, idStudent, Favorit])
+
     //TEST DISPATCH
     const dispatch = useDispatch();
     const akcijaFav = () => {
         dispatch(promjenaFavorita(idStudent))
     }
 
-
-    const idStudent = Number(props.route.params.id);
-    const sviRadovi = useSelector(state => state.radovi.radovi)
-    const rad = sviRadovi.find((r) => r.id === idStudent);
 
     return (
         <View style={styles.ekran}>

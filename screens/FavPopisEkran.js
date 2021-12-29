@@ -18,6 +18,8 @@ const FavPopisEkran = (props) => {
             </TouchableOpacity>
         );
     };
+
+    
     return (
         <View style={styles.ekran}>
             <View style={styles.buttonContainer} >
