@@ -3,12 +3,17 @@ import { StyleSheet, Text, View, Pressable } from 'react-native'
 
 import { MaterialIcons } from '@expo/vector-icons'
 
-const RadioButton = ({ data, onSelect }) => {
+const RadioButton = ({ data, setVrstaUnesenogRada }) => {
     const [VrstaIzbor, setVrstaIzbor] = useState('');
 
+    // const Odabir = (it) => {
+    //     setVrstaIzbor(it.vrsta);
+    //     //it.check = !it.check;
+    // }
     const Odabir = (it) => {
         setVrstaIzbor(it.vrsta);
-        it.check = !it.check;
+        setVrstaUnesenogRada(it.slovo);
+        //it.check = !it.check;
     }
 
     return (

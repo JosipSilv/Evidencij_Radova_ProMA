@@ -1,4 +1,10 @@
 export const data = [
-    { vrsta: 'Završni' },
-    { vrsta: 'Diplomski' }
+    { 
+        vrsta: 'Završni',
+        slovo: 'Z'
+     },
+    { 
+        vrsta: 'Diplomski',
+        slovo: 'D'
+     }
 ]

@@ -86,13 +86,13 @@ export default function App() {
 
         <Stack.Screen name='Detalji' component={DetaljiEkran} options={({ route, navigation }) => {
           return {
-            headerRight: () => { return <TouchableOpacity onPress={() => navigation.navigate('Pocetni ekran')}><Ionicons name='home' size={30} /></TouchableOpacity> }
+            headerRight: () => { return <TouchableOpacity onPress={() => navigation.navigate('Pocetni ekran')}><Ionicons name='home' size={25} /></TouchableOpacity> }
           }
         }} />
 
         <Stack.Screen name='Popis radova' options={({ route, navigation }) => {
           return {
-            headerRight: () => { return <TouchableOpacity onPress={() => navigation.navigate('Unos')}><AntDesign name='addfile' size={30} title='Novi' /></TouchableOpacity> },
+            headerRight: () => { return <TouchableOpacity onPress={() => navigation.navigate('Unos')}><AntDesign name='addfile' size={25} title='Novi' /></TouchableOpacity> },
           }
         }}>{() => tabEkrani()}</Stack.Screen>
 
@@ -104,12 +104,12 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName='Home'>
-          <Drawer.Screen name='Home'>{() => StackEkrani()}</Drawer.Screen>
+        <Drawer.Navigator initialRouteName='Home' screenOptions={{headerStyle: {backgroundColor: '#fff'}}}>
+        <Drawer.Screen name='Home'>{() => StackEkrani()}</Drawer.Screen>
 
-          <Drawer.Screen name='Filter' component={FilteriEkran} />
-        </Drawer.Navigator>
-      </NavigationContainer>
-    </Provider>
+        <Drawer.Screen name='Filter' component={FilteriEkran} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+    </Provider >
   );
 }

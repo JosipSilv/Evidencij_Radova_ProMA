@@ -1,10 +1,14 @@
 import { STUDENTI } from '../../model/TestPodaci'
-import { PROMJENA_FAVORITA } from '../actions/radovi'
+import { Student } from '../../model/Student'
 
 const pocetnoStanje = {
     radovi: STUDENTI,
     filterRadovi: STUDENTI,
     favoritRadovi: []
+}
+
+const generirajId = () => {
+    return (Math.floor(Math.random() * (500 - 100) + 100));
 }
 
 const radReducer = (state = pocetnoStanje, action) => {
@@ -20,9 +24,26 @@ const radReducer = (state = pocetnoStanje, action) => {
             }
             else {
                 const rad = state.radovi.find(rad => rad.id === action.idRada);
-                return {...state, favoritRadovi: state.favoritRadovi.concat(rad)};
+                return { ...state, favoritRadovi: state.favoritRadovi.concat(rad) };
             }
-            break;
+
+        case 'FILTRIRAJ_NIZ':
+            switch (action.vrstaRada) {
+                case 'S':
+                    return { ...state, filterRadovi: state.radovi };
+
+                default:
+                    const noviNizFilter = state.radovi.filter(r => r.vrsta === action.vrstaRada);
+                    return { ...state, filterRadovi: noviNizFilter };
+            }
+
+        case 'UNESI_NOVI_RAD':
+            console.log(action.imeRada);
+            console.log(action.naslovRada);
+            console.log(action.vrstaRada);
+
+            const noviStudent = new Student(generirajId(), action.imeRada, action.naslovRada, action.vrstaRada);
+            state.radovi.push(noviStudent);
 
         default:
             return state;

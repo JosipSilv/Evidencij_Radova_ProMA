@@ -4,7 +4,37 @@ import { Button, StyleSheet, Text, TextInput, View, TouchableOpacity, TouchableW
 import RadioButton from '../components/RadioButton'
 import { data } from '../components/VrstaRadaData'
 
+import { useSelector, useDispatch } from 'react-redux';
+import { unesiRad } from '../store/actions/radovi';
+
+import {Student} from '../model/Student'
+const Konstruktor = () => {
+    return new Student(100, 'ANTE', 'action.naslovRada', 'action.vrstaRada')
+}
+
+
 const UnosEkran = (props) => {
+    const dispatch = useDispatch();
+
+    const [ImeStudenta, setImeStudenta] = useState('');
+    const [NaslovRada, setNaslovRada] = useState('');
+    const [VrstaUnesenogRada, setVrstaUnesenogRada] = useState('');
+
+    const promjenaUnosa = (ime) => {
+        setImeStudenta(ime.replace(/[^a-zA-Z]/g, ''));
+    }
+
+    const promjenaUnosaNaslova = (nas) => {
+        setNaslovRada(nas.replace(/[^a-zA-Z]/g,''));
+    }
+    
+    const unesiNovogStudenta = () => {
+        //console.log(new Student(100, 'ANTE', 'action.naslovRada', 'action.vrstaRada'))
+        //dispatch(unesiRad(ImeStudenta, NaslovRada, VrstaUnesenogRada));
+        console.log(Konstruktor());
+    }
+    
+    
 
     return (
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -12,17 +42,17 @@ const UnosEkran = (props) => {
                 <View style={styles.detalji_container}>
                     <View style={{ width: '80%' }}>
                         <Text style={styles.text}>Student/ica:</Text>
-                        <TextInput style={styles.inputField} />
+                        <TextInput style={styles.inputField} placeholder='Unesi ime...' value={ImeStudenta} onChangeText={promjenaUnosa} />
 
                         <Text style={styles.text}>Naslov:</Text>
-                        <TextInput style={styles.inputField} />
+                        <TextInput style={styles.inputField} placeholder='Unesi naslov rada...' value={NaslovRada} onChangeText={promjenaUnosaNaslova} />
                     </View>
 
                     <View style={styles.radioContainer}>
-                        <RadioButton data={data} />
+                        <RadioButton data={data} setVrstaUnesenogRada={setVrstaUnesenogRada} />
                     </View>
 
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={unesiNovogStudenta}>
                         <Text style={styles.text}>Dodaj</Text>
                     </TouchableOpacity>
                 </View>
